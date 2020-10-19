@@ -1,4 +1,6 @@
 # mywg
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/hujun-open/mywg)](https://pkg.go.dev/github.com/hujun-open/mywg)
+
 mywg is an alternative GO waitgrroup that similar to sync.WaitGroup, the key difference is mywg allow rountine to wait on a channel, so that the wait could be in a select statement; 
 
 ## example
