@@ -50,14 +50,16 @@ func (wg *MyWG) run() {
 
 // Add has semantics as sync.WaitGroup.Add(), only difference is this uses uint32
 func (wg *MyWG) Add(delta uint32) {
-	if newval := atomic.AddUint32(wg.val, delta); newval < 0 {
-		panic("add to MyWG result in negative value")
-	}
+	atomic.AddUint32(wg.val, delta)
 }
 
-// Wait has semantics as sync.WaitGroup.Add()
+// Wait has semantics as sync.WaitGroup.Add().
+// it returns if wg internal value == 0
 func (wg *MyWG) Wait() {
 	defer close(wg.FinishChan)
+	if atomic.LoadUint32(wg.val) == 0 {
+		return
+	}
 	<-wg.FinishChan
 }
 
