@@ -19,7 +19,7 @@ func TestMyWGFinishChan(t *testing.T) {
 		wg.Done()
 	}
 	var target uint32 = 10
-	wg.Add(target)
+	wg.Add(uint(target))
 	for i := 0; i < int(target); i++ {
 		go f(wg, rand.Intn(10), n)
 	}
